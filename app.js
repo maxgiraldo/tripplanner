@@ -8,7 +8,7 @@ var routes = require('./routes');
 var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
-var sass = require('swig');
+var sass = require('sass');
 var swig = require('swig');
 
 var app = express();

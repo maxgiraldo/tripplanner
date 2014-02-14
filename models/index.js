@@ -9,27 +9,27 @@ var Schema = mongoose.Schema;
 var placeSchema = new Schema({
   name: String,
   address: String,
-  city:   String,
-  state:   String,
+  city: String,
+  state: String,
   phone: String,
   location: [Number, Number]
 });
 
 var hotelSchema = new Schema({
-	place: placeSchema,
+	place: [placeSchema],
 	place_id: Number,
 	num_stars: Number,
 	amenities: String
 });
 
 var thingsToDoSchema = new Schema({
-	place: placeSchema,
+	place: [placeSchema],
 	place_id: Number,
 	age_range: String
 });
 
 var restaurantSchema = new Schema({
-	place: placeSchema,
+	place: [placeSchema],
 	place_id: Number,
 	cuisine: String,
 	price: Number

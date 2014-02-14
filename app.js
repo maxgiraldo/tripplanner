@@ -8,7 +8,7 @@ var routes = require('./routes');
 var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
-var sass = require('sass');
+// var sass = require('node-sass');
 var swig = require('swig');
 
 var app = express();
@@ -24,15 +24,17 @@ app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(app.router);
-app.use(
-  sass.middleware({
-    src: __dirname + '/assets', //where the sass files are
-    dest: __dirname + '/public', //where css should go
-    // includePaths: __dirname + '/assets/stylesheets',
-    debug: true // obvious
-  })
-);
+// app.use(
+//   sass.middleware({
+//     src: __dirname + '/assets', //where the sass files are
+//     dest: __dirname + '/public', //where css should go
+//     // includePaths: __dirname + '/assets/stylesheets',
+//     debug: true // obvious
+//   })
+// );
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/bower_components', express.static(__dirname + '/bower_components'));
+
 
 // development only
 if ('development' == app.get('env')) {

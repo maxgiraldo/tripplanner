@@ -1,8 +1,8 @@
-
-/*
- * GET home page.
- */
+var models = require('../models');
 
 exports.index = function(req, res){
-  res.render('index', { title: 'Express' });
+  models.Hotel.find(function(err, results) {
+    res.render('index', { hotels: results });
+  });
+  // res.render('index');
 };

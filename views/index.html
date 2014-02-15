@@ -24,7 +24,7 @@
 
 				<select class="form-control" id="hotels-select">
 					  {% for hotel in hotels %}
-        			<option>{{ hotel.place[0].name }}</option>
+        			<option value="{{hotel._id.toString()}}">{{ hotel.place[0].name }}</option>
       			{% endfor %}
 		 	  </select>
 
@@ -37,7 +37,7 @@
 			<p>
 				<select class="form-control" id="thingstodo-select">
 	        {% for thing in thingstodo %}
-        			<option class="thing">{{ thing.place[0].name }}</option>
+        			<option value="{{thing._id.toString()}}">{{ thing.place[0].name }}</option>
       		{% endfor %}
 		 	  </select>
 		 		<button id="thingtodo-submit" type="submit" class="btn btn-success plan-submit"><i class="fa fa-plus-square"></i></button>
@@ -49,8 +49,8 @@
 			<p>
 				<select class="form-control" id="restaurants-select">
 	        {% for restaurant in restaurants %}
-        			<option class="restaurant">{{ restaurant.place[0].name }}</option>
-      			{% endfor %}
+        			<option value="{{restaurant._id.toString()}}">{{ restaurant.place[0].name }}</option>
+      		{% endfor %}
 		 	  </select>
 		 		<button id="restaurant-submit" type="submit" class="btn btn-success"><i class="fa fa-plus-square"></i></button>
 			</p>
@@ -92,7 +92,7 @@
 		{% autoescape false %}
 		var all_hotels = {{ hotels | json }};
 		var all_restaurants = {{ restaurants | json }};
-		var all_things_to_do = {{ things_to_do | json }};
+		var all_things_to_do = {{ thingstodo | json }};
 		{% endautoescape %}
 
 	</script>
@@ -100,7 +100,7 @@
 	<script type="text/javascript"
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHFfU8AYV2SvmwRIHBilUC1aJk8uQF_lI&sensor=false">
     </script>
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
       function initialize() {
       	var myLatlng = new google.maps.LatLng(40.7060226, -74.0074478);
         var mapOptions = {
@@ -111,14 +111,17 @@
         var map = new google.maps.Map(document.getElementById("map-canvas"),
             mapOptions);
 
-	      var marker = new google.maps.Marker({
-			    position: myLatlng,
-			    map: map,
-			    title:"Hello World!"
-				});
+	    //   all_hotels.forEach(function(hotel) {
+	    //   	var marker = new google.maps.Marker({
+					//     position: new google.maps.LatLng(hotel.place[0].location[0], hotel.place[0].location[1]),
+					//     map: map,
+					//     title: hotel.place[0].name
+					// });
+     //  	});
+
       }
 
       google.maps.event.addDomListener(window, 'load', initialize);
-    </script>
+    </script> -->
 
 {% endblock %}

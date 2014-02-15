@@ -1,14 +1,92 @@
 <!-- index.html -->
 {% extends "layout.html" %}
 
-{% block title %}WikiStack{% endblock %}
+{% block title %}Trip Planner{% endblock %}
 
 {% block content %}
 <div class="page-header">
 	<h1>What do you want to do today?</h1>
 </div>
+<div class="top-part">
+	<div class="day-nav">
+		<p>
+			<button type="button" class="btn btn-default">Day 1</button>
+			<button type="button" class="btn btn-default">Day 2</button>
+			<button type="button" class="btn btn-default">Day 3</button>
+			<button type="button" class="btn btn-success"><i class="fa fa-plus-square"></i></button>
+		</p> <!-- end of buttons -->
+	</div> <!-- day-nav -->
 
-<p>hello</p>
+	<div class="model-data">
+
+		<span class="itin-node">
+			<h2 class="itin-text">Hotels</h2>
+
+				<select class="form-control" id="hotels-select">
+					  {% for hotel in hotels %}
+        			<option>{{ hotel.place[0].name }}</option>
+      			{% endfor %}
+		 	  </select>
+
+		 		<button id="hotel-submit" type="submit" class="btn btn-success"><i class="fa fa-plus-square"></i></button>
+
+		</span>
+
+		<span class="itin-node">
+			<h2 class="itin-text">Things To Do</h2>
+			<p>
+				<select class="form-control" id="thingstodo-select">
+	        {% for thing in thingstodo %}
+        			<option class="thing">{{ thing.place[0].name }}</option>
+      		{% endfor %}
+		 	  </select>
+		 		<button id="thingtodo-submit" type="submit" class="btn btn-success plan-submit"><i class="fa fa-plus-square"></i></button>
+			</p>
+		</span>
+
+		<span class="itin-node">
+			<h2 class="itin-text">Restaurants</h2>
+			<p>
+				<select class="form-control" id="restaurants-select">
+	        {% for restaurant in restaurants %}
+        			<option class="restaurant">{{ restaurant.place[0].name }}</option>
+      			{% endfor %}
+		 	  </select>
+		 		<button id="restaurant-submit" type="submit" class="btn btn-success"><i class="fa fa-plus-square"></i></button>
+			</p>
+		</span>
+	</div> <!-- model-data -->
+
+</div> <!-- top-part -->
+
+<div class="main">
+
+	<div class="plan">
+		<h2>Plan for Day 1</h2>
+		<ul>
+			<li>
+				<h3>Hotel</h3>
+					<ul id="hotel-list">
+					</ul>
+			</li>
+			<li>
+				<h3>Things To Do</h3>
+				<ul id="thingstodo-list">
+					</ul>
+			</li>
+			<li>
+				<h3>Restaurants</h3>
+				<ul id="restaurant-list">
+				</ul>
+			</li>
+		</ul>
+	</div> <!-- plan -->
+
+	<div class="goog-map">
+		<div id="map-canvas"/>
+	</div> <!-- goog-map -->
+
+</div> <!-- main -->
 	<script>
 
 		{% autoescape false %}
@@ -18,5 +96,29 @@
 		{% endautoescape %}
 
 	</script>
+
+	<script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHFfU8AYV2SvmwRIHBilUC1aJk8uQF_lI&sensor=false">
+    </script>
+    <script type="text/javascript">
+      function initialize() {
+      	var myLatlng = new google.maps.LatLng(40.7060226, -74.0074478);
+        var mapOptions = {
+          center: myLatlng,
+          zoom: 15,
+          center: myLatlng
+        };
+        var map = new google.maps.Map(document.getElementById("map-canvas"),
+            mapOptions);
+
+	      var marker = new google.maps.Marker({
+			    position: myLatlng,
+			    map: map,
+			    title:"Hello World!"
+				});
+      }
+
+      google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
 
 {% endblock %}

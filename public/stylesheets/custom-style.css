@@ -1,0 +1,77 @@
+html {
+	height: 100%;
+}
+
+body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+#map-canvas {
+	height: 100%;
+}
+
+h1 {
+	text-align: center;
+}
+
+h2 {
+	font-size: 22px;
+}
+
+h3 {
+	font-size: 18px;
+}
+
+.day-nav {
+	float: left;
+}
+
+.btn-success {
+	background: #39d27a;
+}
+
+.top-part {
+	/*background: #feffaa;*/
+	/*outline: 1px solid #e6e6e6;*/
+	width: 100%;
+	height: 120px;
+}
+
+.model-data {
+	float: right;
+	/*background: #c3ffe8;*/
+	width: 700px;
+	margin-bottom: 40px;
+/*	height: 120px;*/
+}
+
+
+.itin-node {
+	float: left;
+	width: 230px;
+	height: 120px;
+	margin-right: 3px;
+	/*background: #62ff47;*/
+}
+
+.main {
+	/*background: #feffaa;*/
+	margin: 30px 0;
+	width: 100%;
+	height: 400px;
+}
+
+.plan {
+	float: left;
+	/*background: green;*/
+	width: 300px;
+	height: 400px;
+}
+
+.goog-map {
+	float: right;
+	width: 750px;
+	height: 400px;
+}

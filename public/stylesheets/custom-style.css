@@ -75,3 +75,13 @@ h3 {
 	width: 750px;
 	height: 400px;
 }
+
+.deleteItem {
+	font: normal 12px Arial, sans-serif;
+	color: #c1c1c1;
+}
+
+a.deleteItem:hover {
+	color: #000;
+	text-decoration: none;
+}

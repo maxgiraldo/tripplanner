@@ -9,11 +9,9 @@
 </div>
 <div class="top-part">
 	<div class="day-nav">
-		<p>
-			<button type="button" class="btn btn-default">Day 1</button>
-			<button type="button" class="btn btn-default">Day 2</button>
-			<button type="button" class="btn btn-default">Day 3</button>
-			<button type="button" class="btn btn-success"><i class="fa fa-plus-square"></i></button>
+		<p id="day-buttons">
+			<button type="button" class="btn btn-default" value="1">Day 1</button>
+			<button type="button" class="btn btn-success" id="add-day"><i class="fa fa-plus-square"></i></button>
 		</p> <!-- end of buttons -->
 	</div> <!-- day-nav -->
 
@@ -100,28 +98,4 @@
 	<script type="text/javascript"
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHFfU8AYV2SvmwRIHBilUC1aJk8uQF_lI&sensor=false">
     </script>
-    <!-- <script type="text/javascript">
-      function initialize() {
-      	var myLatlng = new google.maps.LatLng(40.7060226, -74.0074478);
-        var mapOptions = {
-          center: myLatlng,
-          zoom: 15,
-          center: myLatlng
-        };
-        var map = new google.maps.Map(document.getElementById("map-canvas"),
-            mapOptions);
-
-	    //   all_hotels.forEach(function(hotel) {
-	    //   	var marker = new google.maps.Marker({
-					//     position: new google.maps.LatLng(hotel.place[0].location[0], hotel.place[0].location[1]),
-					//     map: map,
-					//     title: hotel.place[0].name
-					// });
-     //  	});
-
-      }
-
-      google.maps.event.addDomListener(window, 'load', initialize);
-    </script> -->
-
 {% endblock %}

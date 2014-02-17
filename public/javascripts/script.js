@@ -2,15 +2,15 @@
 
 $( document ).ready(function() {
 
-// Maps Initialization
+// Map Initialization
 	var myLatlng, mapOptions, map;
+	var markers = {};
 
 	function initialize() {
       	myLatlng = new google.maps.LatLng(40.736046, -73.990358);
         mapOptions = {
           center: myLatlng,
           zoom: 12,
-          center: myLatlng
         };
         map = new google.maps.Map(document.getElementById("map-canvas"),
             mapOptions);
@@ -20,32 +20,46 @@ $( document ).ready(function() {
 
 	var addMarker = function (data) {
 		var marker = new google.maps.Marker({
+			id: data._id,
 	    position: new google.maps.LatLng(data.place[0].location[0],data.place[0].location[1]),
 	    map: map,
-	    title: data.place[0].name
+	    title: data.place[0].name,
+	    animation: google.maps.Animation.DROP
 		});
+		markers[data._id] = marker;
+	}
 
+	var deleteMarker = function(id) {
+		var marker = markers[id];
+		marker.setMap(null);
 	}
 // End maps
 
 
 // Add items to day plan, pin locations on map
-	$('#hotel-submit').one('click', function() {
+	var hotelAddLimit = 0;
+	$('#hotel-submit').on('click', function() {
+		if (hotelAddLimit >= 1) return;
 		var selectedHotel = $("#hotels-select option:selected");
 		var hotelId = selectedHotel.val();
 		var hotelData = _.findWhere(all_hotels, {_id: hotelId});
-		addMarker(hotelData);
 
-		var li = "<li>" + selectedHotel.text() + "</li>";
+		var marker = addMarker(hotelData);
+
+		var deleteItem = "<a class='deleteItem'>Delete</a>";
+		var li = "<li><p value="+ hotelId +">" + selectedHotel.text()+ "</p>" + deleteItem + "</li>";
 		$('#hotel-list').append(li);
 
-		var deleteItem = "<a href='#' class='deleteItem'>Delete</a>";
-		$('#hotel-list > li').append(deleteItem);
-
+		// 1 - Delete item from list 2 - delete marker
 		$('a.deleteItem').click(function(event) {
-			$( event.target ).closest( 'li' ).remove();
-		});
+			var p = $( event.target ).prev();
+			var li = $( event.target ).closest( 'li' );
+			$(li).remove();
+			deleteMarker(hotelId);
+			hotelAddLimit = 0;
+		}); // deleteItem
 
+		hotelAddLimit++;
 	});
 
 	$('#thingtodo-submit').click(function() {
@@ -60,6 +74,7 @@ $( document ).ready(function() {
 
 		$('a.deleteItem').click(function(event) {
 			$( event.target ).closest( 'li' ).remove();
+			deleteMarker(thingId);
 		});
 	});
 
@@ -70,6 +85,7 @@ $( document ).ready(function() {
 		var selectedRestaurant = $("#restaurants-select option:selected");
 		var restaurantId = selectedRestaurant.val();
 		var restaurantData = _.findWhere(all_restaurants, {_id: restaurantId});
+
 		addMarker(restaurantData);
 
 		var deleteItem = "<a class='deleteItem'>Delete</a>";
@@ -78,9 +94,11 @@ $( document ).ready(function() {
 
 		$('a.deleteItem').click(function(event) {
 			$( event.target ).closest( 'li' ).remove();
+			deleteMarker(restaurantId);
+			restaurantAddLimit--;
 		});
 
-		addLimit++;
+		restaurantAddLimit++;
 	});
 
 	$('#add-day').click(function() {
